@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>PickyCoupon | Smart Shopping with Verified Codes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Đưa Montserrat thành font mặc định
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'picky-orange': '#eb570c',
+                        'picky-dark': '#333333',
+                        'picky-gray': '#555555',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Khóa tràn lề ngang để không bị kéo qua 2 bên */
+        html, body { 
+            overflow-x: hidden; 
+            width: 100%;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%; /* Chống tự zoom font trên iOS */
+        }
+        .transition-300 { transition: all 0.3s ease; }
+    </style>
+</head>
+
+<body class="bg-white overflow-x-hidden">
+
+    <header class="fixed top-0 left-0 w-full h-[70px] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] z-[1000] flex items-center">
+        <div class="container mx-auto max-w-[1280px] px-5 flex justify-between items-center w-full">
+            <div class="flex items-center gap-2">
+                <a href="index.html"><img src="images/logos/logo.png" alt="Logo" class="h-10"></a>
+                <a href="index.html"><img src="images/logos/brandname.png" alt="Brand" class="h-10"></a>
+            </div>
+
+            <div class="hidden md:flex flex-1 max-w-[400px] mx-8 relative">
+                <input type="text" placeholder="Search for brands..." 
+                       class="w-full py-2.5 pl-6 pr-12 border border-[#eee] rounded-full outline-none text-sm focus:border-picky-orange transition-300">
+                <button class="absolute right-1 top-1 w-8 h-8 bg-picky-orange text-white rounded-full flex items-center justify-center hover:scale-110 transition-300">
+                    <i class="fa-solid fa-magnifying-glass text-[12px]"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-8">
+                <nav class="hidden lg:flex items-center gap-8 text-[13px] font-bold text-picky-gray tracking-wider">                   
+                    <div class="py-4">
+                        <a href="#" class="hover:text-picky-orange transition-all">Stores</a>
+                    </div>
+
+                    <div class="py-4">
+                        <a href="#" class="hover:text-picky-orange transition-all">Promo Codes</a>
+                    </div>
+
+                    <div class="py-4">
+                        <a href="#" class="hover:text-picky-orange transition-all">Blogs</a>
+                    </div>
+                </nav>
+
+            <div class="flex items-center gap-2 group cursor-pointer">
+                <div class="flex items-center gap-0 group-hover:gap-2 transition-all duration-300 overflow-hidden">
+                    <i class="fa-regular fa-user text-xl text-picky-gray group-hover:text-picky-orange"></i>
+                    <span class="max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 transition-all duration-300 font-bold text-sm">Login</span>
+                </div>
+                <a href="#" class="bg-picky-orange text-white px-5 py-2 rounded-full text-sm font-bold shadow-md hover:bg-[#cf4a0a] transition-all duration-300">JOIN FREE</a>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-4 mt-8 mb-12 overflow-hidden z-[100] relative">
+    <div class="w-full relative py-12 group">
+        
+        <div class="swiper tripleCardSwiper !overflow-visible">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide !w-[320px] md:!w-[550px] lg:!w-[750px]">
+                    <a href="https://mealprepsundayservice.com/?ref=Picky" class="block w-full h-[250px] md:h-[400px] lg:h-[480px] rounded-[2rem] overflow-hidden bg-white border border-gray-100 banner-card">
+                        <img src="images/banners/hrbanner-01-mealprep.webp" class="w-full h-full object-cover" alt="Electronics">
+                    </a>
+                </div>
+                <div class="swiper-slide !w-[320px] md:!w-[550px] lg:!w-[750px]">
+                    <a href="https://merino.tech/?ref=picky" class="block w-full h-[250px] md:h-[400px] lg:h-[480px] rounded-[2rem] overflow-hidden bg-white border border-gray-100 banner-card">
+                        <img src="images/banners/hrbanner-02-merino.webp" class="w-full h-full object-cover" alt="Fashion">
+                    </a>
+                </div>
+                <div class="swiper-slide !w-[320px] md:!w-[550px] lg:!w-[750px]">
+                    <a href="https://www.maxpeedingrods.com/?tracking=69db0a5598fe1" class="block w-full h-[250px] md:h-[400px] lg:h-[480px] rounded-[2rem] overflow-hidden bg-white border border-gray-100 banner-card">
+                        <img src="images/banners/hrbanner-03-max.webp" class="w-full h-full object-cover" alt="Travel">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mũi tên điều hướng tối giản -->
+            <div class="swiper-button-next custom-minimal-nav">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="swiper-button-prev custom-minimal-nav">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+        </div>
+
+        <div class="relative w-1/2 mx-auto mt-10 h-[2px] bg-gray-200 rounded-full overflow-hidden">
+            <div id="hero-progress" class="absolute top-0 left-0 h-full bg-picky-orange transition-all duration-100" style="width: 0%"></div>
+        </div>
+    </div>
+    </section>
+
+    <section class="best-coupons max-w-7xl mx-auto px-4 py-12">
+    <div class="mb-6">
+        <h2 class="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
+            The Best Coupons & <span class="text-picky-orange">Trending Offers</span>
+        </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <!-- Cụm Banner 1 -->
+        <div class="banner-group relative h-40 w-full rounded-[2rem] border border-gray-100 bg-white shadow-sm overflow-hidden">   
+            <a href="#" class="absolute inset-0 flex z-20"></a> <!-- Link bao phủ tách biệt -->
+            <div class="banner-item-1 absolute inset-0 flex transition-opacity duration-1000 opacity-100">                   
+                <div class="w-1/2 p-4 md:p-6 flex flex-col justify-between">
+                    <div class="h-6 w-16 md:h-7 md:w-20 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100">
+                        <span class="text-[8px] md:text-[10px] font-bold text-gray-400">LOGO A1</span>
+                    </div>
+                    <div>
+                        <p class="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase mb-1">Smart Devices</p>
+                        <h3 class="text-lg font-black text-gray-800">20% Off</h3>
+                        <span class="text-[9px] md:text-[10px] font-black text-picky-orange border-b-2 border-picky-orange mt-2 inline-block uppercase">Shop now</span>
+                    </div>
+                </div>
+                <div class="w-1/2 h-full"><img src="images/banners/hrbanner-01-mealprep.webp" class="w-full h-full object-cover"></div>
+            </div>
+            <div class="banner-item-2 absolute inset-0 flex transition-opacity duration-1000 opacity-0">                   
+                <div class="w-1/2 p-4 md:p-6 flex flex-col justify-between">
+                    <div class="h-6 w-16 md:h-7 md:w-20 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100">
+                        <span class="text-[8px] md:text-[10px] font-bold text-gray-400">LOGO A2</span>
+                    </div>
+                    <div>
+                        <p class="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase mb-1">New Tech</p>
+                        <h3 class="text-lg font-black text-gray-800">30% Off</h3>
+                        <span class="text-[9px] md:text-[10px] font-black text-picky-orange border-b-2 border-picky-orange mt-2 inline-block uppercase">Shop now</span>
+                    </div>
+                </div>
+                <div class="w-1/2 h-full"><img src="images/banners/hrbanner-01-mealprep.webp" class="w-full h-full object-cover"></div>
+            </div>
+        </div>
+
+        <!-- Cụm Banner 2 (Bạn lặp lại cấu trúc class y hệt trên) -->
+        <div class="banner-group relative h-40 w-full rounded-[2rem] border border-gray-100 bg-white shadow-sm overflow-hidden">
+            <a href="#" class="absolute inset-0 flex z-20"></a> <!-- Link bao phủ tách biệt -->
+            <div class="banner-item-1 absolute inset-0 flex transition-opacity duration-1000 opacity-100">                   
+                <div class="w-1/2 p-4 md:p-6 flex flex-col justify-between">
+                    <div class="h-6 w-16 md:h-7 md:w-20 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100">
+                        <span class="text-[8px] md:text-[10px] font-bold text-gray-400">LOGO A1</span>
+                    </div>
+                    <div>
+                        <p class="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase mb-1">Smart Devices</p>
+                        <h3 class="text-lg font-black text-gray-800">20% Off</h3>
+                        <span class="text-[9px] md:text-[10px] font-black text-picky-orange border-b-2 border-picky-orange mt-2 inline-block uppercase">Shop now</span>
+                    </div>
+                </div>
+                <div class="w-1/2 h-full"><img src="images/banners/hrbanner-01-mealprep.webp" class="w-full h-full object-cover"></div>
+            </div>
+            <div class="banner-item-2 absolute inset-0 flex transition-opacity duration-1000 opacity-0">                   
+                <div class="w-1/2 p-4 md:p-6 flex flex-col justify-between">
+                    <div class="h-6 w-16 md:h-7 md:w-20 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100">
+                        <span class="text-[8px] md:text-[10px] font-bold text-gray-400">LOGO A2</span>
+                    </div>
+                    <div>
+                        <p class="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase mb-1">New Tech</p>
+                        <h3 class="text-lg font-black text-gray-800">30% Off</h3>
+                        <span class="text-[9px] md:text-[10px] font-black text-picky-orange border-b-2 border-picky-orange mt-2 inline-block uppercase">Shop now</span>
+                    </div>
+                </div>
+                <div class="w-1/2 h-full"><img src="images/banners/hrbanner-01-mealprep.webp" class="w-full h-full object-cover"></div>
+            </div>
+        </div>
+
+        <!-- Cụm Banner 3 -->
+        <div class="banner-group relative h-40 w-full rounded-[2rem] border border-gray-100 overflow-hidden shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-200/40 group">
+            <!-- Link overlay -->
+            <a href="#" class="absolute inset-0 z-20"></a>
+
+            <!-- Special Info Banner -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#eb570c] to-[#ff914d] p-6 flex items-center justify-between">
+                
+                <!-- Left: Text & Button -->
+                <div class="w-[60%] z-10 space-y-1">
+                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-[8px] md:text-[9px] font-black text-white uppercase tracking-widest">
+                        Daily Verified
+                    </span>
+                    <h3 class="text-lg md:text-xl font-black text-white leading-tight uppercase">
+                        <span class="text-yellow-300">1000+</span> NEW CODES <br>EVERY DAY
+                    </h3>
+                    <!-- Button with Hover Color Change -->
+                    <button class="mt-2 px-5 py-2 bg-white text-[#eb570c] text-[10px] font-black rounded-xl shadow-lg transition-colors duration-300 group-hover:bg-gray-900 group-hover:text-white uppercase tracking-widest">
+                        Join Now
+                    </button>
+                </div>
+
+                <!-- Right: Special Asset with Floating Effect -->
+                <div class="w-[40%] relative h-full flex items-center justify-center">
+                    <img src="images/icons/rocketpng.png" 
+                        class="absolute w-[60%] max-w-none transform translate-x-4 drop-shadow-2xl animate-float transition-transform duration-500 group-hover:scale-110" 
+                        alt="Special Asset">
+                </div>
+
+                <!-- Decorative Element -->
+                <div class="absolute top-[-20%] right-[-10%] w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="trending-shops py-12 bg-white">
+    <div class="container mx-auto max-w-7xl px-4">       
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-8 gap-2 md:gap-0">
+    
+    <div class="text-left">
+        <h2 class="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
+            Trending <span class="text-picky-orange">Shops</span>
+        </h2>
+    </div>  
+        <a href="#" class="self-start md:self-auto group text-[10px] md:text-xs font-black text-gray-400 hover:text-picky-orange transition-all tracking-widest flex items-center gap-1 uppercase py-1">
+            See all
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 group-hover:translate-x-1 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </a>
+    </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+            
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-100 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                
+                <img src="images/logos/keychron.png" alt="Logo" 
+                     class="relative z-10 max-w-[105px] md:max-w-[130px] transition-all duration-700 object-contain">
+            </a>
+
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-50 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <img src="images/logos/merinotech.png" alt="Logo" class="relative z-10 max-w-[95px] md:max-w-[120px] group-hover:opacity-100 transition-all duration-700 object-contain">
+            </a>
+
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-50 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <img src="images/logos/mealprepsunday.png" alt="Logo" class="relative z-10 max-w-[95px] md:max-w-[120px] group-hover:opacity-100 transition-all duration-700 object-contain">
+            </a>
+
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-50 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <img src="images/logos/maxpeeding.jpeg" alt="Logo" class="relative z-10 max-w-[85px] md:max-w-[110px] group-hover:opacity-100 transition-all duration-700 object-contain">
+            </a>
+            
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 pt-2 md:pt-2">
+            
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-50 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                
+                <img src="images/logos/advancedfood.png" alt="Logo" 
+                     class="relative z-10 max-w-[125px] md:max-w-[150px] group-hover:opacity-100 transition-all duration-700 object-contain">
+            </a>
+
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-50 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <img src="images/logos/encharge.png" alt="Logo" class="relative z-10 max-w-[85px] md:max-w-[110px] group-hover:opacity-100 transition-all duration-700 object-contain">
+            </a>
+
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-50 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <img src="images/logos/imou.jpeg" alt="Logo" class="relative z-10 max-w-[85px] md:max-w-[110px] group-hover:opacity-100 transition-all duration-700 object-contain">
+            </a>
+
+            <a href="#" class="group flex items-center justify-center p-6 md:p-10 bg-white border border-gray-50 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100/50 hover:border-picky-orange/10 transition-all duration-500 h-28 md:h-36 relative overflow-hidden">
+                <img src="images/logos/modvel.png" alt="Logo" class="relative z-10 max-w-[105px] md:max-w-[130px] group-hover:opacity-100 transition-all duration-700 object-contain">
+            </a>
+            
+            </div>
+    </div>
+    </section>
+    
+    <!-- Today's Deals Section -->
+    <section class="today-deals max-w-7xl mx-auto px-4 py-12">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-8 gap-2 md:gap-0">
+        <div class="text-left">
+            <h2 class="text-xl md:text-2xl font-black tracking-tight text-gray-900">
+                Today's <span class="text-picky-orange">Top Deals</span>
+            </h2>
+            <p class="text-[10px] md:text-sm text-gray-600 mt-1 font-medium italic">Picky the best for you, every single day.</p>
+        </div>
+        
+        <a href="#" class="self-start md:self-auto group text-[10px] md:text-xs font-black text-gray-400 hover:text-picky-orange transition-all tracking-widest flex items-center gap-1 uppercase py-1">
+            More deals
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 group-hover:translate-x-1 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="relative group">
+        <button class="swiper-prev-deals absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 border border-gray-100 flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 md:opacity-40 transition-all hidden md:flex">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+        </button>
+        
+        <button class="swiper-next-deals absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 border border-gray-100 flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 md:opacity-40 transition-all hidden md:flex">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        </button>
+
+        <div class="swiper dealsSwiper overflow-visible md:overflow-hidden">
+            <div class="swiper-wrapper">
+                <a href="https://www.keychron.com/collections/all-products/products/keychron-silicone-palm-rest?ref=picky" class="swiper-slide group bg-white rounded-[2rem] overflow-hidden flex h-36 md:h-40 border border-gray-100
+                shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] 
+                hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)]
+                transition-all duration-500 ease-out hover:-translate-y-2">   
+                    <!-- Left: Content Section -->
+                    <div class="w-[55%] p-4 md:p-6 flex flex-col justify-between">
+                        <!-- 4. Limited Offer: Đổi từ Cam sang Xám (Tinh tế hơn) -->
+                        <span class="text-[12px] font-bold text-gray-900 uppercase px-3 py-1 bg-gray-100 w-fit rounded-lg tracking-widest">
+                            <i class="fa-solid fa-fire text-picky-orange rotate-[-15deg] text-[16px]"></i>
+                            15% OFF
+                        </span>
+                        
+                        <div class="flex-grow flex flex-col justify-center mt-2">
+                            <!-- Title -->
+                            <p class="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight mb-2">
+                                Keychron Silicone Palm Rest
+                            </p>
+                            
+                            <!-- 3. Nút Get Deal: Đổi sang Cam rực rỡ (Tăng tính chuyển đổi) -->
+                            <div class="mt-1">
+                                <button class="flex items-center justify-center bg-picky-orange text-white px-4 py-1.5 rounded-xl shadow-md">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Get Deal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Section (Full Height) -->
+                    <!-- 2. Hình ảnh: Nhích nhẹ kích thước & Giảm nhẹ Gradient -->
+                    <div class="w-[45%] h-full relative overflow-hidden bg-gray-50/20">
+                        <img src="images/products/Keychron/Keychron-Silicone-Palm-Rest.webp" 
+                            alt="Keychron Palm Rest" 
+                            class="w-full h-full object-cover transition-transform duration-700">
+                        
+                        <!-- Gradient đã được làm nhẹ lại (opacity thấp hơn) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent"></div>
+                    </div>
+                </a>
+                
+                <a href="https://www.keychron.com/collections/keychron-q-pro-series-keyboard/products/keychron-q10-pro-alice-layout-qmk-via-wireless-custom-mechanical-keyboard?ref=picky" class="swiper-slide group bg-white rounded-[2rem] overflow-hidden flex h-36 md:h-40 border border-gray-100
+                shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] 
+                hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)]
+                transition-all duration-500 ease-out hover:-translate-y-2">   
+                    <!-- Left: Content Section -->
+                    <div class="w-[55%] p-4 md:p-6 flex flex-col justify-between">
+                        <!-- 4. Limited Offer: Đổi từ Cam sang Xám (Tinh tế hơn) -->
+                        <span class="text-[12px] font-bold text-gray-900 uppercase px-3 py-1 bg-gray-100 w-fit rounded-lg tracking-widest">
+                            <i class="fa-solid fa-fire text-picky-orange rotate-[-15deg] text-[16px]"></i>
+                            15% OFF
+                        </span>
+                        
+                        <div class="flex-grow flex flex-col justify-center mt-2">
+                            <!-- Title -->
+                            <p class="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight mb-2">
+                                Keychron Q10 Pro (Alice Layout) QMK/VIA Wireless Custom Mechanical Keyboard
+                            </p>
+                            
+                            <!-- 3. Nút Get Deal: Đổi sang Cam rực rỡ (Tăng tính chuyển đổi) -->
+                            <div class="mt-1">
+                                <button class="flex items-center justify-center bg-picky-orange text-white px-4 py-1.5 rounded-xl shadow-md">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Get Deal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Section (Full Height) -->
+                    <!-- 2. Hình ảnh: Nhích nhẹ kích thước & Giảm nhẹ Gradient -->
+                    <div class="w-[45%] h-full relative overflow-hidden bg-gray-50/20">
+                        <img src="images/products/Keychron/Keychron Q10 Pro.webp" 
+                            alt="Keychron Q10 Pro" 
+                            class="w-full h-full object-cover transition-transform duration-700">
+                        
+                        <!-- Gradient đã được làm nhẹ lại (opacity thấp hơn) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent"></div>
+                    </div>
+                </a>
+
+                <a href="https://www.keychron.com/collections/mice-collection/products/keychron-m3-wireless-mouse?ref=picky" class="swiper-slide group bg-white rounded-[2rem] overflow-hidden flex h-36 md:h-40 border border-gray-100
+                shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] 
+                hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)]
+                transition-all duration-500 ease-out hover:-translate-y-2">   
+                    <!-- Left: Content Section -->
+                    <div class="w-[55%] p-4 md:p-6 flex flex-col justify-between">
+                        <!-- 4. Limited Offer: Đổi từ Cam sang Xám (Tinh tế hơn) -->
+                        <span class="text-[12px] font-bold text-gray-900 uppercase px-3 py-1 bg-gray-100 w-fit rounded-lg tracking-widest">
+                            <i class="fa-solid fa-fire text-picky-orange rotate-[-15deg] text-[16px]"></i>
+                            15% OFF
+                        </span>
+                        
+                        <div class="flex-grow flex flex-col justify-center mt-2">
+                            <!-- Title -->
+                            <p class="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight mb-2">
+                                Keychron M3 Wireless Mouse
+                            </p>
+                            
+                            <!-- 3. Nút Get Deal: Đổi sang Cam rực rỡ (Tăng tính chuyển đổi) -->
+                            <div class="mt-1">
+                                <button class="flex items-center justify-center bg-picky-orange text-white px-4 py-1.5 rounded-xl shadow-md">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Get Deal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Section (Full Height) -->
+                    <!-- 2. Hình ảnh: Nhích nhẹ kích thước & Giảm nhẹ Gradient -->
+                    <div class="w-[45%] h-full relative overflow-hidden bg-gray-50/20">
+                        <img src="images/products/Keychron/Keychron M3 Wireless Mouse.webp" 
+                            alt="Keychron M3 Wireless Mouse" 
+                            class="w-full h-full object-cover transition-transform duration-700">
+                        
+                        <!-- Gradient đã được làm nhẹ lại (opacity thấp hơn) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent"></div>
+                    </div>
+                </a>
+
+                <a href="https://www.keychron.com/products/keychron-q3-qmk-custom-mechanical-keyboard-iso-layout-collection?ref=picky&variant=40277176320089" class="swiper-slide group bg-white rounded-[2rem] overflow-hidden flex h-36 md:h-40 border border-gray-100
+                shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] 
+                hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)]
+                transition-all duration-500 ease-out hover:-translate-y-2">   
+                    <!-- Left: Content Section -->
+                    <div class="w-[55%] p-4 md:p-6 flex flex-col justify-between">
+                        <!-- 4. Limited Offer: Đổi từ Cam sang Xám (Tinh tế hơn) -->
+                        <span class="text-[12px] font-bold text-gray-900 uppercase px-3 py-1 bg-gray-100 w-fit rounded-lg tracking-widest">
+                            <i class="fa-solid fa-fire text-picky-orange rotate-[-15deg] text-[16px]"></i>
+                            15% OFF
+                        </span>
+                        
+                        <div class="flex-grow flex flex-col justify-center mt-2">
+                            <!-- Title -->
+                            <p class="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight mb-2">
+                                Keychron Q3 QMK Custom Mechanical Keyboard ISO Layout Collection
+                            </p>
+                            
+                            <!-- 3. Nút Get Deal: Đổi sang Cam rực rỡ (Tăng tính chuyển đổi) -->
+                            <div class="mt-1">
+                                <button class="flex items-center justify-center bg-picky-orange text-white px-4 py-1.5 rounded-xl shadow-md">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Get Deal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Section (Full Height) -->
+                    <!-- 2. Hình ảnh: Nhích nhẹ kích thước & Giảm nhẹ Gradient -->
+                    <div class="w-[45%] h-full relative overflow-hidden bg-gray-50/20">
+                        <img src="images/products/Keychron/Keychron Q3 QMK Custom Mechanical Keyboard ISO Layout Collection.webp" 
+                            alt="Keychron Q3 QMK Custom Mechanical Keyboard ISO Layout Collection" 
+                            class="w-full h-full object-cover transition-transform duration-700">
+                        
+                        <!-- Gradient đã được làm nhẹ lại (opacity thấp hơn) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent"></div>
+                    </div>
+                </a>
+
+                <a href="https://www.keychron.com/collections/mice-collection/products/lemokey-g2-wireless-mouse?ref=picky" class="swiper-slide group bg-white rounded-[2rem] overflow-hidden flex h-36 md:h-40 border border-gray-100
+                shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] 
+                hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)]
+                transition-all duration-500 ease-out hover:-translate-y-2">   
+                    <!-- Left: Content Section -->
+                    <div class="w-[55%] p-4 md:p-6 flex flex-col justify-between">
+                        <!-- 4. Limited Offer: Đổi từ Cam sang Xám (Tinh tế hơn) -->
+                        <span class="text-[12px] font-bold text-gray-900 uppercase px-3 py-1 bg-gray-100 w-fit rounded-lg tracking-widest">
+                            <i class="fa-solid fa-fire text-picky-orange rotate-[-15deg] text-[16px]"></i>
+                            15% OFF
+                        </span>
+                        
+                        <div class="flex-grow flex flex-col justify-center mt-2">
+                            <!-- Title -->
+                            <p class="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight mb-2">
+                                Lemokey G2 Wireless Mouse
+                            </p>
+                            
+                            <!-- 3. Nút Get Deal: Đổi sang Cam rực rỡ (Tăng tính chuyển đổi) -->
+                            <div class="mt-1">
+                                <button class="flex items-center justify-center bg-picky-orange text-white px-4 py-1.5 rounded-xl shadow-md">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Get Deal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Section (Full Height) -->
+                    <!-- 2. Hình ảnh: Nhích nhẹ kích thước & Giảm nhẹ Gradient -->
+                    <div class="w-[45%] h-full relative overflow-hidden bg-gray-50/20">
+                        <img src="images/products/Keychron/Lemokey G2 Wireless Mouse.webp" 
+                            alt="Lemokey G2 Wireless Mouse" 
+                            class="w-full h-full object-cover transition-transform duration-700">
+                        
+                        <!-- Gradient đã được làm nhẹ lại (opacity thấp hơn) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent"></div>
+                    </div>
+                </a>
+
+                <a href="https://www.keychron.com/collections/mice-collection/products/keychron-m6-wireless-mouse?ref=picky" class="swiper-slide group bg-white rounded-[2rem] overflow-hidden flex h-36 md:h-40 border border-gray-100
+                shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] 
+                hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)]
+                transition-all duration-500 ease-out hover:-translate-y-2">   
+                    <!-- Left: Content Section -->
+                    <div class="w-[55%] p-4 md:p-6 flex flex-col justify-between">
+                        <!-- 4. Limited Offer: Đổi từ Cam sang Xám (Tinh tế hơn) -->
+                        <span class="text-[12px] font-bold text-gray-900 uppercase px-3 py-1 bg-gray-100 w-fit rounded-lg tracking-widest">
+                            <i class="fa-solid fa-fire text-picky-orange rotate-[-15deg] text-[16px]"></i>
+                            15% OFF
+                        </span>
+                        
+                        <div class="flex-grow flex flex-col justify-center mt-2">
+                            <!-- Title -->
+                            <p class="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight mb-2">
+                                Keychron M6 Wireless Mouse
+                            </p>
+                            
+                            <!-- 3. Nút Get Deal: Đổi sang Cam rực rỡ (Tăng tính chuyển đổi) -->
+                            <div class="mt-1">
+                                <button class="flex items-center justify-center bg-picky-orange text-white px-4 py-1.5 rounded-xl shadow-md">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Get Deal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Section (Full Height) -->
+                    <!-- 2. Hình ảnh: Nhích nhẹ kích thước & Giảm nhẹ Gradient -->
+                    <div class="w-[45%] h-full relative overflow-hidden bg-gray-50/20">
+                        <img src="images/products/Keychron/Keychron M6 Wireless Mouse.webp" 
+                            alt="Keychron M6 Wireless Mouse" 
+                            class="w-full h-full object-cover transition-transform duration-700">
+                        
+                        <!-- Gradient đã được làm nhẹ lại (opacity thấp hơn) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent"></div>
+                    </div>
+                </a>
+
+                <a href="https://www.keychron.com/collections/keychron-q-pro-series-keyboard/products/keychron-q1-pro-qmk-via-wireless-custom-mechanical-keyboard?ref=picky" class="swiper-slide group bg-white rounded-[2rem] overflow-hidden flex h-36 md:h-40 border border-gray-100
+                shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] 
+                hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)]
+                transition-all duration-500 ease-out hover:-translate-y-2">   
+                    <!-- Left: Content Section -->
+                    <div class="w-[55%] p-4 md:p-6 flex flex-col justify-between">
+                        <!-- 4. Limited Offer: Đổi từ Cam sang Xám (Tinh tế hơn) -->
+                        <span class="text-[12px] font-bold text-gray-900 uppercase px-3 py-1 bg-gray-100 w-fit rounded-lg tracking-widest">
+                            <i class="fa-solid fa-fire text-picky-orange rotate-[-15deg] text-[16px]"></i>
+                            15% OFF
+                        </span>
+                        
+                        <div class="flex-grow flex flex-col justify-center mt-2">
+                            <!-- Title -->
+                            <p class="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight mb-2">
+                                Keychron Q1 Pro QMK/VIA Wireless Custom Mechanical Keyboard
+                            </p>
+                            
+                            <!-- 3. Nút Get Deal: Đổi sang Cam rực rỡ (Tăng tính chuyển đổi) -->
+                            <div class="mt-1">
+                                <button class="flex items-center justify-center bg-picky-orange text-white px-4 py-1.5 rounded-xl shadow-md">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Get Deal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Section (Full Height) -->
+                    <!-- 2. Hình ảnh: Nhích nhẹ kích thước & Giảm nhẹ Gradient -->
+                    <div class="w-[45%] h-full relative overflow-hidden bg-gray-50/20">
+                        <img src="images/products/Keychron/Keychron Q1 Pro QMK.webp" 
+                            alt="Keychron Q1 Pro QMK/VIA Wireless Custom Mechanical Keyboard" 
+                            class="w-full h-full object-cover transition-transform duration-700">
+                        
+                        <!-- Gradient đã được làm nhẹ lại (opacity thấp hơn) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent"></div>
+                    </div>
+                </a>
+                
+                </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Strip Banner Section -->
+    <section class="max-w-7xl mx-auto px-4 my-10">
+    <div class="w-full aspect-[1280/300] relative group overflow-hidden rounded-xl md:rounded-2xl shadow-sm">
+        
+        <!-- Link bao phủ toàn bộ banner -->
+        <a class="block w-full h-full">
+            <!-- Ảnh Banner -->
+            <img src="images/banners/stripbanner01.webp" 
+                 alt="deal banner" 
+                 class="w-full h-full object-cover transition-transform duration-700">
+            
+            <!-- Lớp phủ (nếu bạn muốn ảnh sáng hơn, hãy xóa div này) -->
+            <!-- <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div> -->
+        </a>
+
+    </div>
+    </section>
+
+    <section class="electronics-category max-w-7xl mx-auto px-4 py-12 overflow-hidden">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-8 gap-3 md:gap-0">
+        <div class="text-left">
+            <h2 class="text-xl md:text-2xl font-black tracking-tight text-gray-900">
+                Electronics <span class="text-picky-orange">Collection</span>
+            </h2>
+            <p class="text-[10px] md:text-sm text-gray-400 mt-1 font-medium italic">High-tech gear curated for your digital life.</p>
+        </div>
+        
+        <a href="#" class="self-start md:self-auto group text-[10px] md:text-xs font-black text-gray-400 hover:text-picky-orange transition-all tracking-widest flex items-center gap-1 uppercase py-1">
+            View All Gear
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 group-hover:translate-x-1 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">       
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/tech brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/tech brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/tech brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/tech brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/tech brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    
+    <section class="fashion-category max-w-7xl mx-auto px-4 py-12 overflow-hidden">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-8 gap-3 md:gap-0">
+        <div class="text-left">
+            <h2 class="text-xl md:text-2xl font-black tracking-tight text-gray-900">
+                Fashion <span class="text-picky-orange">Collection</span>
+            </h2>
+            <p class="text-[10px] md:text-sm text-gray-400 mt-1 font-medium italic">High-tech gear curated for your digital life.</p>
+        </div>
+        
+        <a href="#" class="self-start md:self-auto group text-[10px] md:text-xs font-black text-gray-400 hover:text-picky-orange transition-all tracking-widest flex items-center gap-1 uppercase py-1">
+            View all styles
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 group-hover:translate-x-1 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">       
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/fashion brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/fashion brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/fashion brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/fashion brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="1 group flex flex-row md:flex-col bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 h-32 md:h-auto md:aspect-[3/4] cursor-pointer">
+            <div class="relative w-[40%] md:w-full md:h-[60%] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="images/banners/fashion brand.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <span class="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[8px] md:text-[9px] font-black text-gray-800 shadow-sm uppercase tracking-tighter z-10">
+                    </span>
+            </div>
+
+            <div class="w-[60%] md:w-full p-4 md:p-5 flex flex-col justify-between flex-grow">
+                <div class="space-y-1">
+                    <div class="text-[10px] md:text-[12px] font-black text-gray-900 uppercase tracking-widest opacity-80">
+                        PREMIUM TECH PARTNERSHIP
+                    </div>           
+                    <h3 class="text-[12px] md:text-[14px] font-semibold text-gray-800 leading-tight line-clamp-2">
+                        YOUR PRODUCT NAME
+                    </h3>
+                </div>       
+                <div class="flex mt-2">
+                    <div class="px-3 py-1 bg-gray-900 text-white text-[8px] md:text-[9px] font-bold rounded-lg group-hover:bg-picky-orange transition-all uppercase tracking-wider shadow-sm">
+                        Promo Code
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="featured-categories-banner max-w-7xl mx-auto px-4 py-16 relative">
+    <!-- Nền tổng với các hạt Floating Elements lơ lửng xung quanh -->
+    <div class="rounded-[2.5rem] p-6 md:p-16 relative overflow-hidden bg-white border border-gray-100 shadow-sm">
+        
+        <!-- Các hạt trang trí lơ lửng (Floating Spheres/Cones) -->
+        <div class="absolute top-10 left-10 w-8 h-8 bg-orange-200 rounded-full blur-sm opacity-40 animate-slow-float"></div>
+        <div class="absolute top-40 right-20 w-6 h-6 bg-picky-orange rounded-full blur-md opacity-20 animate-slow-float" style="animation-delay: 2s"></div>
+        <div class="absolute bottom-20 left-1/4 w-4 h-4 bg-gray-300 rotate-45 opacity-30 animate-slow-float" style="animation-delay: 1s"></div>
+        
+        <!-- Header -->
+        <div class="relative z-10 text-center mb-10">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-orange-50 text-picky-orange text-[10px] font-black uppercase tracking-widest mb-4">Featured Categories</span>
+            <h2 class="text-2xl md:text-4xl font-black tracking-tight text-gray-900 uppercase leading-tight">
+                BROWSE DEALS <br class="md:hidden"> BY <span class="text-picky-orange">INTERESTS</span>
+            </h2>
+            <a href="#" class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-picky-orange hover:gap-4 transition-all duration-300 mt-4">
+                Explore All <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+            <!-- Biểu tượng % lơ lửng gần tiêu đề -->
+            <div class="absolute -top-4 right-1/4 md:right-1/3 text-2xl opacity-10 rotate-12 animate-bounce">%</div>
+        </div>
+
+        <!-- Bento Grid Layout -->
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 relative z-10">
+            
+            <!-- 2 Thẻ Lớn (Electronics & Fashion) giữ nguyên hiệu ứng Lift-up -->
+            <a href="#" class="group col-span-2 row-span-2 relative h-[320px] rounded-[2.5rem] overflow-hidden border border-gray-100 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                <img src="images/banners/tech02.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent p-8 flex flex-col justify-end">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white/80 mb-1">Featured Category</span>
+                    <span class="text-2xl font-black text-white uppercase tracking-wider">Electronics</span>
+                </div>
+            </a>
+
+            <a href="#" class="group col-span-2 row-span-2 relative h-[320px] rounded-[2.5rem] overflow-hidden border border-gray-100 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                <img src="images/banners/fashion02.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-pink-900/60 via-transparent to-transparent p-8 flex flex-col justify-end">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white/80 mb-1">Featured Category</span>
+                    <span class="text-2xl font-black text-white uppercase tracking-wider">Fashion</span>
+                </div>
+            </a>
+
+            <!-- 4 Thẻ Phụ Nâng Cấp Glassmorphism -->
+            <!-- Opacity 90%, viền 1px trắng sáng, Soft Shadow -->
+            <a href="#" class="group aspect-square flex flex-col items-center justify-center gap-3 p-4 bg-white/90 backdrop-blur-xl border border-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-orange-100 hover:-translate-y-2 transition-all duration-500">
+                <img src="images/icons/Foodpng.png" class="w-12 h-12 group-hover:scale-110 transition-transform">
+                <span class="text-[10px] md:text-xs font-black text-gray-800 uppercase tracking-widest">Food</span>
+            </a>
+
+            <a href="#" class="group aspect-square flex flex-col items-center justify-center gap-3 p-4 bg-white/90 backdrop-blur-xl border border-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-orange-100 hover:-translate-y-2 transition-all duration-500">
+                <img src="images/icons/Travelpng.png" class="w-12 h-12 group-hover:scale-110 transition-transform">
+                <span class="text-[10px] md:text-xs font-black text-gray-800 uppercase tracking-widest">Travel</span>
+            </a>
+
+            <a href="#" class="group aspect-square flex flex-col items-center justify-center gap-3 p-4 bg-white/90 backdrop-blur-xl border border-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-orange-100 hover:-translate-y-2 transition-all duration-500">
+                <img src="images/icons/Beautypng.png" class="w-12 h-12 group-hover:scale-110 transition-transform">
+                <span class="text-[10px] md:text-xs font-black text-gray-800 uppercase tracking-widest">Beauty</span>
+            </a>
+
+            <a href="#" class="group aspect-square flex flex-col items-center justify-center gap-3 p-4 bg-white/90 backdrop-blur-xl border border-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-orange-100 hover:-translate-y-2 transition-all duration-500">
+                <img src="images/icons/Homepng.png" class="w-12 h-12 group-hover:scale-110 transition-transform">
+                <span class="text-[10px] md:text-xs font-black text-gray-800 uppercase tracking-widest">Home</span>
+            </a>
+
+        </div>
+    </div>
+    </section>
+
+    <section class="how-it-works py-20 bg-gray-50/50">
+    <div class="container mx-auto max-w-7xl px-5">
+        
+        <div class="text-center mb-16">
+            <h2 class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-tight mb-4">
+                How to <span class="text-picky-orange">Save Like a Pro</span>
+            </h2>
+            <div class="h-1.5 w-20 bg-picky-orange mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            
+            <div class="group relative bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                <div class="absolute -top-6 left-8 w-12 h-12 bg-gray-900 text-white rounded-2xl flex items-center justify-center font-black text-xl shadow-lg group-hover:bg-picky-orange transition-colors">01</div>
+                
+                <div class="mb-6 mt-4">
+                    <div class="w-16 h-16 rounded-3xl bg-orange-50 flex items-center justify-center text-3xl">
+                        🔍
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-black text-gray-800 uppercase tracking-wide mb-3">Find Your Brand</h3>
+                <p class="text-sm text-gray-500 font-medium leading-relaxed mb-6">
+                    Search for your favorite stores like Amazon, Nike or Samsung to find the latest active coupon codes.
+                </p>
+                <a href="#" class="text-[11px] font-black uppercase tracking-[0.2em] text-picky-orange flex items-center gap-2 hover:gap-4 transition-all">
+                    Search Stores <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="group relative bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                <div class="absolute -top-6 left-8 w-12 h-12 bg-gray-900 text-white rounded-2xl flex items-center justify-center font-black text-xl shadow-lg group-hover:bg-picky-orange transition-colors">02</div>
+                
+                <div class="mb-6 mt-4">
+                    <div class="w-16 h-16 rounded-3xl bg-blue-50 flex items-center justify-center text-3xl">
+                        ✂️
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-black text-gray-800 uppercase tracking-wide mb-3">Grab the Code</h3>
+                <p class="text-sm text-gray-500 font-medium leading-relaxed mb-6">
+                    Click "Get Coupon" to reveal and copy the code. We verify every discount daily to ensure it works.
+                </p>
+                <a href="#" class="text-[11px] font-black uppercase tracking-[0.2em] text-blue-500 flex items-center gap-2 hover:gap-4 transition-all">
+                    How We Verify <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="group relative bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                <div class="absolute -top-6 left-8 w-12 h-12 bg-gray-900 text-white rounded-2xl flex items-center justify-center font-black text-xl shadow-lg group-hover:bg-picky-orange transition-colors">03</div>
+                
+                <div class="mb-6 mt-4">
+                    <div class="w-16 h-16 rounded-3xl bg-green-50 flex items-center justify-center text-3xl">
+                        💰
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-black text-gray-800 uppercase tracking-wide mb-3">Apply & Save</h3>
+                <p class="text-sm text-gray-500 font-medium leading-relaxed mb-6">
+                    Paste the code at checkout and watch the price drop. Shopping smarter has never been this easy.
+                </p>
+                <a href="#" class="text-[11px] font-black uppercase tracking-[0.2em] text-green-500 flex items-center gap-2 hover:gap-4 transition-all">
+                    Start Saving <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    </section>
+
+    <section class="faq-section py-20 bg-white">
+    <div class="container mx-auto max-w-7xl px-5">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            <div class="lg:col-span-4">
+                <span class="inline-block px-4 py-1.5 rounded-full bg-orange-50 text-picky-orange text-[11px] font-black uppercase tracking-widest mb-5">Support Center</span>
+                <h2 class="text-3xl font-black text-gray-900 uppercase tracking-tight mb-6 leading-tight">
+                    Frequently Asked <br><span class="text-picky-orange">Questions</span>
+                </h2>
+                <p class="text-gray-500 font-medium text-sm leading-relaxed mb-8">
+                    Have questions about how PickyCoupon works or how to use our codes? We’ve got the answers right here.
+                </p>
+                <div class="p-6 bg-gray-50 rounded-3xl border border-gray-100">
+                    <p class="text-gray-800 font-bold text-sm mb-2">Still need help?</p>
+                    <p class="text-gray-500 text-xs mb-4">Can't find the answer you're looking for?</p>
+                    <a href="contact-us.html" class="inline-block w-full py-3 bg-gray-900 text-white text-center text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-picky-orange transition-all shadow-lg">Contact Support</a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8 space-y-6">
+                
+                <div class="p-8 bg-white border border-gray-100 rounded-[2rem] shadow-sm hover:shadow-md transition-all">
+                    <h4 class="text-base font-black text-gray-800 uppercase tracking-wide mb-3 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-picky-orange"></span> Are the coupon codes on PickyCoupon free to use?
+                    </h4>
+                    <p class="text-sm text-gray-500 font-medium leading-relaxed pl-5">
+                        Absolutely. All coupon codes and deals listed on our platform are 100% free for everyone. We do not require any subscription or payment to access our verified discounts.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white border border-gray-100 rounded-[2rem] shadow-sm hover:shadow-md transition-all">
+                    <h4 class="text-base font-black text-gray-800 uppercase tracking-wide mb-3 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-blue-500"></span> How do I know if a coupon code is still valid?
+                    </h4>
+                    <p class="text-sm text-gray-500 font-medium leading-relaxed pl-5">
+                        Our team verifies every coupon daily. You can see the "Verified" badge and the last updated date on each offer. We focus on quality over quantity to ensure you don't waste time on expired codes.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white border border-gray-100 rounded-[2rem] shadow-sm hover:shadow-md transition-all">
+                    <h4 class="text-base font-black text-gray-800 uppercase tracking-wide mb-3 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span> Is it safe to shop through PickyCoupon links?
+                    </h4>
+                    <p class="text-sm text-gray-500 font-medium leading-relaxed pl-5">
+                        Yes, it is completely safe. When you click a deal, we redirect you directly to the official store's website. We never ask for your credit card information or personal shopping data.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white border border-gray-100 rounded-[2rem] shadow-sm hover:shadow-md transition-all">
+                    <h4 class="text-base font-black text-gray-800 uppercase tracking-wide mb-3 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-purple-500"></span> Why didn't my coupon code work?
+                    </h4>
+                    <p class="text-sm text-gray-500 font-medium leading-relaxed pl-5">
+                        Sometimes codes have specific terms, such as a minimum spend or being valid only for new customers. Always check the "Deal Details" to ensure your order meets the store's requirements.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="newsletter py-20 bg-[#fcfcfc]">
+    <div class="container mx-auto max-w-[800px] px-5 text-center">
+        
+        <h2 class="text-2xl md:text-4xl font-black text-gray-800 mb-4 tracking-tight">
+            Don’t Miss Out on Exclusive Deals!
+        </h2>
+        <p class="text-gray-600 text-sm md:text-base mb-10 max-w-[800px] mx-auto leading-relaxed">
+            Get the latest discount codes from Picky Coupon delivered straight to your inbox weekly.
+        </p>
+
+        <div class="relative max-w-[650px] mx-auto group">
+            <form action="#" class="flex flex-col md:flex-row items-center gap-3 md:gap-0 bg-white border border-gray-200 rounded-[40px] p-2 pl-6 focus-within:border-picky-orange/50 focus-within:shadow-2xl focus-within:shadow-picky-orange/5 transition-all duration-500">
+                
+                <input 
+                    type="email" 
+                    placeholder="Enter your email address..." 
+                    required
+                    class="w-full bg-transparent border-none outline-none text-gray-700 text-sm py-4 md:py-0 placeholder:text-gray-300"
+                >
+
+                <button 
+                    type="submit" 
+                    class="w-full md:w-auto px-10 py-4 bg-picky-orange text-white text-sm font-black rounded-[32px] hover:bg-[#cf4a0a] hover:shadow-lg hover:shadow-picky-orange/30 transition-all duration-300 whitespace-nowrap"
+                >
+                    Subscribe Now
+                </button>
+            </form>
+        </div>
+
+        <p class="mt-6 text-[11px] text-gray-500 italic">
+            We respect your privacy. You can unsubscribe at any time.
+        </p>
+
+    </div>
+    </section>
+
+    <footer class="footer-section bg-white pt-20 pb-10 border-t border-gray-100 font-sans">
+    <div class="container mx-auto max-w-[1280px] px-5">
+        
+        <div class="flex items-center gap-2 mb-12">
+            <a href="index.html"><img src="images/logos/logo.png" alt="Logo" class="h-10"></a>
+            <a href="index.html"><img src="images/logos/brandname.png" alt="Brand" class="h-10"></a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+            
+            <div class="lg:col-span-4">
+                <p class="text-gray-600 text-sm leading-relaxed mb-6 max-w-[350px] font-medium">
+                    PickyCoupon is a dedicated platform designed to simplify your online shopping experience by handpicking the best deals and verified coupons.
+                </p>
+                <p class="text-gray-600 text-sm leading-relaxed mb-8 max-w-[350px] font-medium">
+                    We focus on quality over quantity, ensuring that every discount you find on our site is active and ready to use.
+                </p>
+                
+                <h4 class="font-bold text-gray-800 text-sm mb-5">Follow Our Deals</h4>
+                <div class="flex gap-3">
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-facebook-f text-xs"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-instagram text-xs"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-tiktok text-xs"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-linkedin text-xs"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-x text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 lg:ml-auto">
+                <h4 class="font-black text-gray-800 text-xs mb-8 uppercase tracking-widest">Categories</h4>
+                <ul class="space-y-4">
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Electronics</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Fashion & Beauty</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Home & Kitchen</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Travel & Booking</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Health & Fitness</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-3 lg:ml-auto">
+                <h4 class="font-black text-gray-800 text-xs mb-8 uppercase tracking-widest">Explore Picky</h4>
+                <ul class="space-y-4">
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Trending Shops</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Saving Blog</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Top Brand Deals</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Gift Cards</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Best Sellers</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-3 lg:ml-auto">
+                <h4 class="font-black text-gray-800 text-xs mb-8 uppercase tracking-widest">Support</h4>
+                <ul class="space-y-4">
+                    <li><a href="about-us.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">About Us</a></li>
+                    <li><a href="affiliate-disclosure.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Affiliate Disclosure</a></li>
+                    <li><a href="privacy-policy.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-medium">Terms of Service</a></li>
+                    <li><a href="contact-us.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-bold">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-10 border-t border-gray-50 text-center">
+            <p class="text-gray-600 text-[14px] mb-2 font-medium">
+                © 2026 <span class="text-gray-800 font-bold tracking-tight">PickyCoupon</span>. All Rights Reserved.
+            </p>
+            <p class="text-gray-500 text-[12px] leading-relaxed italic">
+                We may earn an affiliate commission when you use our links to make a purchase. <a href="affiliate-disclosure.html" class="underline hover:text-picky-orange transition-all">Learn more.</a>
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <style>
+    /* Hiệu ứng thẻ mờ và nhỏ ở 2 bên */
+    .tripleCardSwiper .swiper-slide {
+        opacity: 0.5;
+        transform: scale(0.85); /* Nhỏ hơn 15% */
+        transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Hiệu ứng thẻ trung tâm nổi bật 3D */
+    .tripleCardSwiper .swiper-slide-active {
+        opacity: 1;
+        transform: scale(1); /* Lớn hơn hẳn 2 bên */
+        z-index: 10;
+    }
+
+    /* Đổ bóng dày cho thẻ active */
+    .tripleCardSwiper .swiper-slide-active .banner-card {
+        shadow-color: rgba(255, 92, 0, 0.15); /* Màu cam nhẹ cho shadow nếu muốn */
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Ghi đè toàn bộ style cũ của mũi tên */
+    .custom-minimal-nav {
+        background: none !important; /* Loại bỏ hình tròn trắng/cam */
+        width: 30px !important;
+        height: 50px !important;
+        color: rgba(255, 255, 255, 0.8) !important; /* Màu trắng mờ mặc định */
+        font-size: 24px !important; /* Độ lớn của mũi tên */
+        transition: all 0.3s ease;
+        /* Đổ bóng nhẹ để mũi tên không bị "mất tích" trên nền trắng */
+        filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.3)); 
+    }
+
+    /* Bỏ icon mặc định của Swiper */
+    .custom-minimal-nav::after {
+        display: none !important;
+    }
+
+    /* Hiệu ứng khi hover vào nút */
+    .custom-minimal-nav:hover {
+        color: #FF5C00 !important; /* Đổi sang màu cam Picky khi hover */
+        transform: scale(1.2);
+    }
+
+    /* Chỉ hiện rõ khi người dùng rê chuột vào khu vực Hero Banner */
+    .group .custom-minimal-nav {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .group:hover .custom-minimal-nav {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Căn chỉnh vị trí sát mép nhưng không chạm lề */
+    .swiper-button-prev.custom-minimal-nav { left: 15px !important; }
+    .swiper-button-next.custom-minimal-nav { right: 15px !important; }
+
+    @keyframes float {
+    0% { transform: translate(1rem, 0px); }
+    50% { transform: translate(1rem, -10px); }
+    100% { transform: translate(1rem, 0px); }
+    }
+
+    .animate-float {
+        /* Chạy liên tục, nhẹ nhàng trong 3 giây */
+        animation: float 3s ease-in-out infinite;
+    }
+
+    /* Tinh chỉnh nút Join Now khi hover vào toàn banner */
+    .group:hover button {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2);
+    }
+
+    @keyframes slowFloat {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+    }
+    .animate-slow-float {
+        animation: slowFloat 6s ease-in-out infinite;
+    }
+   </style>
+    
+    <script class="herobanner">
+    var swiper = new Swiper(".tripleCardSwiper", {
+    effect: "coverflow",
+    centeredSlides: true,
+    slidesPerView: "auto",
+    loop: true,
+    loopedSlides: 3,
+    speed: 1000,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
+    coverflowEffect: {
+        rotate: 0,
+        stretch: -80, // Kéo các thẻ xích lại gần nhau hơn để thấy sự chồng lớp 3D
+        depth: 150,
+        modifier: 1,
+        slideShadows: false,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    // Xử lý Progress Bar
+    on: {
+        autoplayTimeLeft(s, time, progress) {
+            // progress chạy từ 1 về 0, ta đảo ngược lại để bar chạy từ 0% đến 100%
+            document.getElementById("hero-progress").style.width = (1 - progress) * 100 + "%";
+        }
+    }
+});
+    </script>
+    
+    <script class="top-banner">
+        function toggleBanners() {
+    const banners = [
+        { a: 'banner-1-a', b: 'banner-1-b' },
+        { a: 'banner-2-a', b: 'banner-2-b' }
+    ];
+
+    banners.forEach(group => {
+        const elemA = document.getElementById(group.a);
+        const elemB = document.getElementById(group.b);
+
+        if (elemA.classList.contains('opacity-100')) {
+            elemA.classList.replace('opacity-100', 'opacity-0');
+            elemB.classList.replace('opacity-0', 'opacity-100');
+        } else {
+            elemA.classList.replace('opacity-0', 'opacity-100');
+            elemB.classList.replace('opacity-100', 'opacity-0');
+        }
+    });
+}
+
+// Tự động thay đổi sau mỗi 4 giây
+setInterval(toggleBanners, 4000);
+    </script>
+
+    <script class="topdeals">
+        var swiperDeals = new Swiper(".dealsSwiper", {
+            slidesPerView: 1.25, // Mobile thấy 1 cái và 1 phần của cái tiếp theo
+            centeredSlides: true,
+            spaceBetween: 12,
+            loop: true,
+            navigation: {
+                nextEl: ".swiper-next-deals",
+                prevEl: ".swiper-prev-deals",
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2.5,
+                    centeredSlides: false,
+                    spaceBetween: 16,
+                },
+                1024: {
+                    slidesPerView: 3.5, // Desktop hiện 3 cái rưỡi
+                    centeredSlides: false,
+                    spaceBetween: 20,
+                },
+            },
+        });
+    </script>
+
+    <script class="bestcoupon">
+    function startGlobalRotations() {
+        const groups = document.querySelectorAll('.banner-group');
+        groups.forEach(group => {
+            const b1 = group.querySelector('.banner-item-1');
+            const b2 = group.querySelector('.banner-item-2');
+            let isFirst = true;
+            if(b1 && b2) {
+                setInterval(() => {
+                    if(isFirst) {
+                        b1.classList.replace('opacity-100', 'opacity-0');
+                        b2.classList.replace('opacity-0', 'opacity-100');
+                    } else {
+                        b1.classList.replace('opacity-0', 'opacity-100');
+                        b2.classList.replace('opacity-100', 'opacity-0');
+                    }
+                    isFirst = !isFirst;
+                }, 3000);
+            }
+        });
+    }
+    document.addEventListener('DOMContentLoaded', startGlobalRotations);
+    </script>
+
+</body>
+
+</html>

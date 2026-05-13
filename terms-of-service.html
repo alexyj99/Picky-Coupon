@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>PickyCoupon | Smart Shopping with Verified Codes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Đưa Montserrat thành font mặc định
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'picky-orange': '#eb570c',
+                        'picky-dark': '#333333',
+                        'picky-gray': '#555555',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Khóa tràn lề ngang để không bị kéo qua 2 bên */
+        html, body { 
+            overflow-x: hidden; 
+            width: 100%;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%; /* Chống tự zoom font trên iOS */
+        }
+        .transition-300 { transition: all 0.3s ease; }
+    </style>
+</head>
+
+<body class="bg-white">
+    <header class="fixed top-0 left-0 w-full h-[70px] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] z-[1000] flex items-center">
+            <div class="container mx-auto max-w-[1280px] px-5 flex justify-between items-center w-full">
+                <div class="flex items-center gap-2">
+                    <a href="index.html"><img src="images/logos/logo.png" alt="Logo" class="h-10"></a>
+                    <a href="index.html"><img src="images/logos/brandname.png" alt="Brand" class="h-10"></a>
+                </div>
+
+                <div class="hidden md:flex flex-1 max-w-[400px] mx-8 relative">
+                    <input type="text" placeholder="Search for brands..." 
+                        class="w-full py-2.5 pl-6 pr-12 border border-[#eee] rounded-full outline-none text-sm focus:border-picky-orange transition-300">
+                    <button class="absolute right-1 top-1 w-8 h-8 bg-picky-orange text-white rounded-full flex items-center justify-center hover:scale-110 transition-300">
+                        <i class="fa-solid fa-magnifying-glass text-[12px]"></i>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <nav class="hidden lg:flex gap-6 text-[13px] font-bold text-picky-gray uppercase tracking-wider">
+                        <a href="#" class="hover:text-picky-orange transition-300">All Stores</a>
+                        <a href="#" class="hover:text-picky-orange transition-300">Promo Codes</a>
+                        <a href="#" class="hover:text-picky-orange transition-300">Saving Blog</a>
+                    </nav>
+
+                    <div class="flex items-center gap-2 group cursor-pointer">
+                        <div class="flex items-center gap-0 group-hover:gap-2 transition-all duration-300 overflow-hidden">
+                            <i class="fa-regular fa-user text-xl text-picky-gray group-hover:text-picky-orange"></i>
+                            <span class="max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 transition-all duration-300 font-bold text-sm">Login</span>
+                        </div>
+                        <a href="#" class="bg-picky-orange text-white px-5 py-2 rounded-full text-sm font-bold shadow-md hover:bg-[#cf4a0a] transition-300">JOIN FREE</a>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <section class="tos-content py-24 bg-white">
+    <div class="container mx-auto max-w-[850px] px-5">
+        
+        <div class="border-b-4 border-gray-900 pb-10 mb-12">
+            <span class="text-picky-orange font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Legal Documentation</span>
+            <h1 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase mb-4">
+                Terms of <span class="text-picky-orange italic">Service</span>
+            </h1>
+            <div class="flex items-center gap-4">
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest">
+                    Version 2.0 • Last Updated: April 08, 2026
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-[#fafafa] rounded-[40px] p-8 md:p-12 mb-16 border border-gray-100 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-8 opacity-5">
+                <i class="fa-solid fa-scale-balanced text-8xl"></i>
+            </div>
+            <h2 class="text-gray-900 font-black uppercase text-sm tracking-widest mb-6 flex items-center">
+                <i class="fa-solid fa-shield-halved mr-3 text-picky-orange"></i> In Plain English
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    <p class="font-bold text-gray-900 mb-2">What we do:</p>
+                    We provide manually verified coupons for free. We treat our data with IT-level discipline to save you time.
+                </div>
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    <p class="font-bold text-gray-900 mb-2">What you should know:</p>
+                    We may earn a commission if you use our links. We don't control the brands, and codes can expire without notice.
+                </div>
+            </div>
+        </div>
+
+        <div class="prose prose-orange max-w-none">
+            
+            <div class="mb-12">
+                <h2 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6 flex items-baseline gap-4">
+                    <span class="text-picky-orange opacity-30 text-4xl font-mono">01</span> 
+                    Acceptance of Terms
+                </h2>
+                <p class="text-gray-600 leading-relaxed">
+                    By accessing or using PickyCoupon.com, you agree to be bound by these Terms of Service and all applicable laws and regulations. These terms constitute a legally binding agreement between you and the PickyCoupon team. If you do not agree, please refrain from using our services.
+                </p>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6 flex items-baseline gap-4">
+                    <span class="text-picky-orange opacity-30 text-4xl font-mono">02</span> 
+                    Description of Service
+                </h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    PickyCoupon is a curated platform for digital coupons and shopping deals. Our team applies technical logic and infrastructure discipline to filter out "expired noise" and provide high-quality data.
+                </p>
+                <ul class="space-y-3 text-gray-600 list-none pl-0">
+                    <li class="flex items-start gap-3 italic"><i class="fa-solid fa-check text-picky-orange mt-1"></i> We do not sell products; we facilitate savings.</li>
+                    <li class="flex items-start gap-3 italic"><i class="fa-solid fa-check text-picky-orange mt-1"></i> Our service is 100% free for all users.</li>
+                </ul>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6 flex items-baseline gap-4">
+                    <span class="text-picky-orange opacity-30 text-4xl font-mono">03</span> 
+                    Affiliate Disclosure
+                </h2>
+                <div class="bg-gray-900 text-white p-8 rounded-3xl mb-6 shadow-xl">
+                    <p class="text-sm leading-relaxed opacity-90">
+                        In compliance with global transparency standards, PickyCoupon is a reader-supported platform. We may earn a small commission from merchants when you make a purchase through our links. This comes at no extra cost to you and supports our technical maintenance.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6 flex items-baseline gap-4">
+                    <span class="text-picky-orange opacity-30 text-4xl font-mono">04</span> 
+                    User Obligations
+                </h2>
+                <p class="text-gray-600 mb-4">To maintain a secure environment, users are prohibited from:</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none pl-0 text-sm text-gray-600">
+                    <li class="p-4 bg-gray-50 rounded-xl">Using bots or scrapers to extract data.</li>
+                    <li class="p-4 bg-gray-50 rounded-xl">Interfering with site security protocols.</li>
+                    <li class="p-4 bg-gray-50 rounded-xl">Reselling coupon data for commercial gain.</li>
+                    <li class="p-4 bg-gray-50 rounded-xl">Spamming or abusing verification systems.</li>
+                </ul>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6 flex items-baseline gap-4">
+                    <span class="text-picky-orange opacity-30 text-4xl font-mono">05</span> 
+                    Accuracy & Reliability
+                </h2>
+                <p class="text-gray-600 leading-relaxed">
+                    While our founders apply "IT Discipline" to every code, coupon accuracy can change instantly at the merchant's discretion. We do not warrant that materials are 100% accurate or current. "Picky" reflects our intent and rigorous process, not a guarantee of merchant behavior.
+                </p>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6 flex items-baseline gap-4">
+                    <span class="text-picky-orange opacity-30 text-4xl font-mono">06</span> 
+                    Intellectual Property
+                </h2>
+                <p class="text-gray-600 leading-relaxed">
+                    All custom graphics, "Picky" branding, and our proprietary verification methodology are the intellectual property of PickyCoupon. Unauthorized reproduction is strictly prohibited.
+                </p>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6 flex items-baseline gap-4">
+                    <span class="text-picky-orange opacity-30 text-4xl font-mono">07</span> 
+                    Governing Law
+                </h2>
+                <p class="text-gray-600 leading-relaxed">
+                    These terms are governed by the laws of Vietnam. Any disputes arising from the use of this site shall be resolved within the exclusive jurisdiction of the local courts.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-20 pt-12 border-t border-gray-100 text-center md:text-left">
+            <h3 class="text-xl font-black text-gray-900 uppercase mb-4">Still have questions?</h3>
+            <p class="text-gray-500 text-sm mb-8">If anything is unclear, our team is ready to provide technical or legal clarification.</p>
+            <div class="flex flex-wrap gap-6 justify-center md:justify-start">
+                <a href="mailto:contact@pickycoupon.com" class="px-8 py-3 bg-black text-white font-black text-xs uppercase tracking-widest rounded-full hover:bg-picky-orange transition-colors shadow-lg">
+                    Contact Legal
+                </a>
+                <a href="about-us.html" class="px-8 py-3 bg-white border border-gray-200 text-gray-900 font-black text-xs uppercase tracking-widest rounded-full hover:border-black transition-colors">
+                    Our Story
+                </a>
+            </div>
+        </div>
+
+    </div>
+    </section>
+
+    <footer class="footer-section bg-white pt-20 pb-10 border-t border-gray-100">
+        <div class="container mx-auto max-w-[1280px] px-5">
+            
+            <div class="flex items-center gap-2 mb-12">
+                <a href="index.html"><img src="images/logos/logo.png" alt="Logo" class="h-10"></a>
+                <a href="index.html"><img src="images/logos/brandname.png" alt="Brand" class="h-10"></a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+                
+                <div class="lg:col-span-4">
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6 max-w-[350px]">
+                        PickyCoupon is a dedicated platform designed to simplify your online shopping experience by handpicking the best deals and verified coupons.
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-8 max-w-[350px]">
+                        We focus on quality over quantity, ensuring that every discount you find on our site is active and ready to use.
+                    </p>
+                    
+                    <h4 class="font-bold text-gray-800 text-sm mb-5">Follow Our Deals</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fa-brands fa-facebook-f text-xs"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fa-brands fa-instagram text-xs"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fa-brands fa-tiktok text-xs"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fa-brands fa-linkedin text-xs"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-picky-orange hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fa-brands fa-x text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 lg:ml-auto">
+                    <h4 class="font-black text-gray-800 text-xs mb-8 uppercase tracking-widest">Categories</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Electronics</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Fashion & Beauty</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Home & Kitchen</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Travel & Booking</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Health & Fitness</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3 lg:ml-auto">
+                    <h4 class="font-black text-gray-800 text-xs mb-8 uppercase tracking-widest">Explore Picky</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Trending Shops</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Saving Blog</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Top Brand Deals</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Gift Cards</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Best Sellers</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3 lg:ml-auto">
+                    <h4 class="font-black text-gray-800 text-xs mb-8 uppercase tracking-widest">Support</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about-us.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all">About Us</a></li>
+                        <li><a href="affiliate-disclosure.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Affiliate Disclosure</a></li>
+                        <li><a href="privacy-policy.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all">Terms of Service</a></li>
+                        <li><a href="contact-us.html" class="text-gray-600 hover:text-picky-orange text-sm transition-all font-bold">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-10 border-t border-gray-50 text-center">
+                <p class="text-gray-600 text-[14px] mb-2 font-medium">
+                    © 2026 <span class="text-gray-800 font-bold tracking-tight">PickyCoupon</span>. All Rights Reserved.
+                </p>
+                <p class="text-gray-500 text-[12px] leading-relaxed italic">
+                    We may earn an affiliate commission when you use our links to make a purchase. <a href="affiliate-disclosure.html" class="underline hover:text-picky-orange transition-all">Learn more.</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
