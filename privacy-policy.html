@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>PickyCoupon | Smart Shopping with Verified Codes</title>
+    <title>PickyCoupon | Smart Shopping with Verified Codes & Deals</title>
+    <meta name="description" content="Save big with the latest hand-picked coupons, verified promo codes, and daily deals at PickyCoupon.">
+    <link rel="canonical" href="https://pickycoupon.com/" />
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pickycoupon.com/">
+    <meta property="og:title" content="PickyCoupon | Smart Shopping Starts Here">
+    <meta property="og:description" content="Exclusive deals and verified coupons updated daily. Don't miss out!">
+    <meta property="og:image" content="https://pickycoupon.com/images/thumbnail.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://pickycoupon.com/">
+    <meta property="twitter:title" content="PickyCoupon | Smart Shopping with Verified Codes">
+    <meta property="twitter:description" content="Exclusive deals and verified coupons updated daily.">
+    <meta property="twitter:image" content="https://pickycoupon.com/images/thumbnail.jpg">
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,7 +33,6 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        // Đưa Montserrat thành font mặc định
                         sans: ['Montserrat', 'sans-serif'],
                     },
                     colors: {
@@ -31,17 +47,21 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* Khóa tràn lề ngang để không bị kéo qua 2 bên */
         html, body { 
             overflow-x: hidden; 
             width: 100%;
             scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%; /* Chống tự zoom font trên iOS */
+            -webkit-text-size-adjust: 100%;
         }
         .transition-300 { transition: all 0.3s ease; }
+        
+        /* Custom scrollbar cho đẹp */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #eb570c; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c4490a; }
     </style>
 </head>
 
